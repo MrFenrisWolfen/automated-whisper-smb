@@ -36,7 +36,7 @@ services:
       - cpu  # Dieser Service wird nur im CPU-Profil gestartet
 
   # SMB-Server
-   whisper_samba:
+  whisper_samba:
     image: dockurr/samba
     container_name: whisper-smb-server
     environment:
