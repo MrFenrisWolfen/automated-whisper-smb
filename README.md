@@ -36,15 +36,13 @@ You can specify the used model with an env variable at the start in case of some
 WHISPER_MODEL=tiny docker-compose --profile cpu up -d
 ```
 
-Size	Parameters	English-only model	Multilingual model	Required VRAM	Relative speed
-tiny	39 M	tiny.en	tiny	~1 GB	~10x
-base	74 M	base.en	base	~1 GB	~7x
-small	244 M	small.en	small	~2 GB	~4x
-medium	769 M	medium.en	medium	~5 GB	~2x
-large	1550 M	N/A	large	~10 GB	1x
-turbo	809 M	N/A	turbo	~6 GB	~8x
-
-
+The models so far are:
+tiny ~39mb
+base ~74mb
+small ~244mb
+medium ~769mb
+large ~1550mb
+turbo ~809mb
 
 
 3. Usage:
