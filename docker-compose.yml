@@ -8,7 +8,7 @@ services:
       dockerfile: whisper.dockerfile
     container_name: whisper-gpu
     environment:
-      WHISPER_MODEL: medium
+      WHISPER_MODEL:  "${WHISPER_MODEL:-medium}"
     volumes:
       - whisper_data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
       - whisper_cache:/root/.cache/whisper  # Persistente Speicherung von Modellen nach dem 1. Download
@@ -29,7 +29,7 @@ services:
       dockerfile: whisper.dockerfile
     container_name: whisper-cpu
     environment:
-      WHISPER_MODEL: small
+      WHISPER_MODEL:  "${WHISPER_MODEL:-small}"
     volumes:
       - whisper_data:/app/audio/data
       - whisper_cache:/root/.cache/whisper
