@@ -20,6 +20,7 @@ services:
     runtime: nvidia  # Notwendig für GPU-Unterstützung
     profiles:
       - gpu  # Dieser Service wird nur im GPU-Profil gestartet
+    restart: unless-stopped
 
   # Whisper CPU
   whisper-cpu:
@@ -34,6 +35,7 @@ services:
       - whisper_cache:/root/.cache/whisper
     profiles:
       - cpu  # Dieser Service wird nur im CPU-Profil gestartet
+    restart: unless-stopped
 
   # SMB-Server
   whisper_samba:
@@ -51,6 +53,7 @@ services:
       - "445:445"
     volumes:
       - whisper_data:/storage
+    restart: unless-stopped
 
 # Gemeinsame Volumes
 volumes:
