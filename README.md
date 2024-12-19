@@ -11,6 +11,7 @@ SETUP:
 git clone https://github.com/MrFenrisWolfen/automated-whisper-smb.git
 ```
 
+
 2. Start the docker-compose file:
 
 IMPORTANT!! the standard model (medium) can be changed inside the compose file to turbo or tiny.
@@ -28,6 +29,13 @@ Or in case you have to use the CPU:
 ```
 sudo docker-compose --profile cpu up -d
 ```
+
+You can specify the used model with an env variable at the start in case of some tests or just for playing around:
+
+```
+WHISPER_MODEL=tiny docker-compose --profile cpu up -d
+```
+
 
 3. Usage:
 
