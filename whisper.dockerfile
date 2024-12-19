@@ -7,9 +7,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     python3.9 \
     python3-distutils \
     python3-pip \
-    ffmpeg \
-    curl \
-    cron
+    ffmpeg
 
 # PIP commands
 RUN pip install --upgrade pip
