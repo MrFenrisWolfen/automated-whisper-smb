@@ -36,7 +36,9 @@ You can specify the used model with an env variable at the start in case of some
 WHISPER_MODEL=tiny docker-compose --profile cpu up -d
 ```
 
+
 The models so far are:
+
 tiny ~39mb
 base ~74mb
 small ~244mb
