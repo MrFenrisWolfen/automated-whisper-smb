@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Setze die Umgebungsvariable f  r das Modell
-export MODEL=${MODEL:-tiny}
+export MODEL=${WHISPER_MODEL:-tiny}
 
 # Stelle den SMB zugriff sicher
 chmod 777 /app/audio/data -R
