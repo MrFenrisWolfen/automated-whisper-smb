@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  # Hauptcontainer mit Whisper
+  whisper:
+    build:
+      context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
+      dockerfile: dockerfile
+    container_name: whisper
+    volumes:
+      - whisper_data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
+	  - whisper_cache:/root/.cache/Whisper	#Peristente Speicherung von modellen nach dem 1. Download
+    networks:
+      - whisper_network
+
+  # SMB-Server
+  smb:
+    image: dperson/samba    # Beispiel-Image für SMB-Server
+    container_name: smb-server
+    ports:
+      - "139:139"           # SMB-Port
+      - "445:445"           # SMB-Port
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - whisper_data:/mnt/shared      # Gemeinsames Volume mit Hauptcontainer
+    networks:
+      - whisper_network
+
+# Gemeinsame Volumes
+volumes:
+  whisper_data:
+  whisper_cache:
+
+# Gemeinsames Netzwerk
+networks:
+  whisper_network:
+    driver: bridge
