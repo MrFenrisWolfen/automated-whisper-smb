@@ -19,8 +19,8 @@ RUN pip install -U openai-whisper
 RUN pip3 install torch torchvision torchaudio
 
 # Herunterladen der Scripts von Github
-RUN curl -o script.sh https://raw.githubusercontent.com/MrFenrisWolfen/automated-whisper-smb/main/check_for_new_files.sh
-RUN curl -o start.sh https://raw.githubusercontent.com/MrFenrisWolfen/automated-whisper-smb/main/start.sh
+COPY scripts/check_for_new_files.sh /check.sh
+COPY scripts/start.sh /start.sh
 
 # Startbefehl, um das Skript beim Container-Start auszuführen
 CMD ["bash", "/start.sh"]
