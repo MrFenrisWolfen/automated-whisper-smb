@@ -11,7 +11,7 @@ services:
       WHISPER_MODEL: medium
     volumes:
       - whisper_data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
-      - whisper_cache:/root/.cache/Whisper  # Persistente Speicherung von Modellen nach dem 1. Download
+      - whisper_cache::/root/.cache/whisper  # Persistente Speicherung von Modellen nach dem 1. Download
     deploy:
       resources:
         reservations:
@@ -31,7 +31,7 @@ services:
       WHISPER_MODEL: small
     volumes:
       - whisper_data:/app/audio/data
-      - whisper_cache:/root/.cache/Whisper
+      - whisper_cache:/root/.cache/whisper
     profiles:
       - cpu  # Dieser Service wird nur im CPU-Profil gestartet
 
