@@ -19,9 +19,14 @@ wait years for a finished subtitle.
 
 If you've got an GPU, start use this command:
 
+```
 sudo docker-compose --profile gpu up -d
+```
 
 Or in case you have to use the CPU:
 
+```
 sudo docker-compose --profile cpu up -d
+```
+
 
