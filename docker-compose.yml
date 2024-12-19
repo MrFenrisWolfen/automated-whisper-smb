@@ -28,7 +28,7 @@ services:
       dockerfile: dockerfile
     container_name: whisper_cpu
     environment:
-      WHISPER_MODEL: tiny
+      WHISPER_MODEL: small
     volumes:
       - whisper_data:/app/audio/data
       - whisper_cache:/root/.cache/Whisper
