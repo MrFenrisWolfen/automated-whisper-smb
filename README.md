@@ -7,9 +7,9 @@ SETUP:
 
 1. Clone this repo to your desired folder (as example your actual working DIR)
 
-'''
+```
 git clone https://github.com/MrFenrisWolfen/automated-whisper-smb.git
-'''
+```
 
 2. Start the docker-compose file:
 
