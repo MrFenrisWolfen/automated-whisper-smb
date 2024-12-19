@@ -2,11 +2,11 @@ version: "3.8"
 
 services:
   # Whisper GPU
-  whisper:
+  whisper-gpu:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
-    container_name: whisper
+    container_name: whisper-gpu
     environment:
       WHISPER_MODEL: medium
     volumes:
@@ -26,7 +26,7 @@ services:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
-    container_name: whisper_cpu
+    container_name: whisper-cpu
     environment:
       WHISPER_MODEL: small
     volumes:
@@ -36,16 +36,21 @@ services:
       - cpu  # Dieser Service wird nur im CPU-Profil gestartet
 
   # SMB-Server
-  smb:
-    image: dperson/samba    # Beispiel-Image für SMB-Server
-    container_name: smb-server
-    ports:
-      - "139:139"           # SMB-Port
-      - "445:445"           # SMB-Port
+   whisper_samba:
+    image: dockurr/samba
+    container_name: whisper-smb-server
     environment:
-      - TZ=Europe/Berlin
+      NAME: "whisper"
+      USER: "samba"
+      PASS: "secret"
+      RW: true
+      UID: 1000
+      GID: 1000
+    ports:
+      - "139:139"
+      - "445:445"
     volumes:
-      - whisper_data:/mnt/shared      # Gemeinsames Volume mit Hauptcontainer
+      - whisper_data:/storage
 
 # Gemeinsame Volumes
 volumes:
