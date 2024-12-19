@@ -54,8 +54,8 @@ Now just connect a new networkdrive in Windows or connect via smb to the drive:
 
 The standard login for the network drive is which can be altered inside the docker-compose.yml is:
 
-User:  samba
-Pass:  secret
+-User:  samba
+-Pass:  secret
 
 Drop an .mp4, .mkv, .avi, .mp3, .wav File to that folder and watch the magic happens.
 The Container checks frequently for a new compatible file, but the first translation will took a while cause
