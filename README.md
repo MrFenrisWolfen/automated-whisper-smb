@@ -38,23 +38,12 @@ WHISPER_MODEL=tiny docker-compose --profile cpu up -d
 
 The models so far are:
 
-tiny
-base
-small
-medium
-large
-turbo
-
-
-
-
-
-tiny ~39mb
-base ~74mb
-small ~244mb
-medium ~769mb
-large ~1550mb
-turbo ~809mb
+- tiny ~39mb
+- base ~74mb
+- small ~244mb
+- medium ~769mb
+- large ~1550mb
+- turbo ~809mb
 
 
 3. Usage:
