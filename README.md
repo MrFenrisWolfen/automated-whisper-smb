@@ -6,9 +6,9 @@ which is creating subtitles in english and german for files on an network drive 
 SETUP:
 
 1. Clone this repo to your desired folder (as example your actual working DIR)
-
+'''
 git clone https://github.com/MrFenrisWolfen/automated-whisper-smb.git
-
+'''
 2. Start the docker-compose file:
 
 IMPORTANT!! the standard model (medium) can be changed inside the compose file to turbo or tiny.
