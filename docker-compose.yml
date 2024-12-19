@@ -5,7 +5,7 @@ services:
   whisper:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
-      dockerfile: dockerfile
+      dockerfile: whisper.dockerfile
     container_name: whisper
     environment:
       WHISPER_MODEL: medium
@@ -25,7 +25,7 @@ services:
   whisper-cpu:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
-      dockerfile: dockerfile
+      dockerfile: whisper.dockerfile
     container_name: whisper_cpu
     environment:
       WHISPER_MODEL: small
