@@ -8,6 +8,9 @@ chmod 777 /app/audio/data -R
 
 #!/bin/bash
 
+PATH=/usr/local/bin:/usr/bin:/bin
+SHELL=/bin/bash
+
 # Endlosschleife, um das Skript alle 60 Sekunden auszuführen
 while true; do
   echo "Starte das Hauptskript..."
