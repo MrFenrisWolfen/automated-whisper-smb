@@ -19,5 +19,8 @@ RUN pip3 install torch torchvision torchaudio
 # Herunterladen der Scripts von Github
 COPY scripts/start.sh /start.sh
 
+# Mache Script ausführbar
+RUN chmod +x /start.sh
+
 # Startbefehl, um das Skript beim Container-Start auszuführen
 CMD ["bash", "/start.sh"]
