@@ -14,7 +14,7 @@ git clone https://github.com/MrFenrisWolfen/automated-whisper-smb.git
 
 2. Start the docker-compose file:
 
-IMPORTANT!! the standard model (medium) can be changed inside the compose file to turbo or tiny.
+IMPORTANT!! The standard model (medium) can be changed inside the compose file to turbo or tiny.
 If you have less than 8GB of VRAM you should use TURBO and if you've got no GPU try small or tiny if you dont want to
 wait years for a finished subtitle.
 
