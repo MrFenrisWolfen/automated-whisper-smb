@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# Standardwert für das Modell, falls keine Umgebungsvariable gesetzt ist
-MODEL="${MODEL:-tiny}"
-echo "MODEL ist: $MODEL" >> /var/log/check.log
+# pfad des scripts
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-SCRIPT_LOCK="$SCRIPT_DIR/script.lock"
 
-# Prüfen, ob die Lock-Datei existiert
+# prüfen ob die Lock-Datei existiert und abbruch falls ja
+SCRIPT_LOCK="$SCRIPT_DIR/script.lock"
 if [ -f "$SCRIPT_LOCK" ]; then
   echo "Das Script ist bereits in Verwendung, stoppe erneutes Starten."
   exit 0
@@ -15,16 +13,34 @@ fi
 # Lock-Datei erstellen
 touch "$SCRIPT_LOCK"
 
+# settings laden
+SETTINGS_FILE="$(dirname "$(realpath "$0")")/settings.txt"
+if [ -f "$SETTINGS_FILE" ]; then
+  source "$SETTINGS_FILE"
+fi
+
+# standardwerte falls keine settings vorhanden sein sollten
+MODEL="${MODEL:-tiny}"
+LANGUAGES="${LANGUAGES:-de}"
+echo "MODEL ist: $MODEL" >> /var/log/check.log
+echo "LANGUAGES ist: $LANGUAGES" >> /var/log/check.log
+
+#Settings und Ordner freigeben
+chmod -R 777 "$SCRIPT_DIR"
+chmod -R 777 /app/audio/data
+
 # Verzeichnis, das überprüft werden soll
 WATCH_DIR="/app/audio/data"										# Ordner mit den Videodateien Optimieren! -- nur eine variable nötig?
+
 # Datei, in der die zuletzt bekannten Dateien gespeichert werden
 LAST_STATE_FILE="$SCRIPT_DIR/Last_State.txt"
+
 # Temporäre Lock-Dateien
-LOCK_DIR="/app/audio/data"											# Ordner mit den Videodateien Optimieren!
+LOCK_DIR="$SCRIPT_DIR"                    # Ordner mit den Videodateien Optimieren!
 
 # Erstelle die State-Datei, falls sie nicht existiert
 if [ ! -f "$LAST_STATE_FILE" ]; then
-  # Anstatt die aktuellen Dateien direkt zu speichern, mache die Datei leer
+  # Datei leeren
   > "$LAST_STATE_FILE"
 fi
 
@@ -40,6 +56,7 @@ fi
 
 # Aktuelle Dateien abrufen
 CURRENT_FILES=$(get_current_files)
+
 # Zuletzt bekannte Dateien abrufen
 LAST_FILES=$(cat "$LAST_STATE_FILE")
 
@@ -53,15 +70,15 @@ if [ "$CURRENT_FILES" != "$LAST_FILES" ]; then
   echo "Neue Dateien: $NEW_FILES"
 
 
-# Funktion, um zu prüfen, ob eine Datei vollständig kopiert wurde
-is_file_complete() {
+# funktion um zu prüfen ob eine datei vollständig kopiert wurde
+  is_file_complete() {
   local file="$1"
   local size1 size2
   size1=$(stat --format="%s" "$file")
-  sleep 2  # Warten, um die Dateigröße erneut zu prüfen
+  sleep 2  # warten um die dateigröße erneut zu prüfen
   size2=$(stat --format="%s" "$file")
-  [[ "$size1" -eq "$size2" ]]  # Vergleiche die beiden Größen
-}
+  [[ "$size1" -eq "$size2" ]]  # vergleiche die beiden Größen
+  }
 
 
   while IFS= read -r TARGET_FILE; do
@@ -73,6 +90,7 @@ is_file_complete() {
       continue
       fi
 
+      # erstellen der datei basierten lock datei
       LOCK_FILE="$LOCK_DIR/$(basename "$TARGET_FILE").lock"
 
       # Prüfen, ob die Datei bereits in Bearbeitung ist
@@ -89,25 +107,12 @@ is_file_complete() {
       TARGET_DIR=$(dirname "$TARGET_FILE")
       BASENAME=$(basename "$TARGET_FILE" | sed 's/\.[^.]*$//')
 
-      # Dynamische Output-Ordner im gleichen Verzeichnis wie die Eingabedatei
-      OUTPUT_DIR="$TARGET_DIR/${BASENAME}-en"
-      OUTPUT_DIR_DE="$TARGET_DIR/${BASENAME}-de"
-
-      # Command für Englisch
-      COMMAND1="whisper \"$TARGET_FILE\" --model $MODEL --language en --output_dir \"$OUTPUT_DIR\""
-
-      # Command für Deutsch
-      COMMAND2="whisper \"$TARGET_FILE\" --model $MODEL --language de --output_dir \"$OUTPUT_DIR_DE\""
-
-      # Commands ausführen
-      echo "Starte Verarbeitung für Englisch..."
-      eval "$COMMAND1"
-      chmod 777 /app/audio/data -R
-
-      echo "Starte Verarbeitung für Deutsch..."
-      eval "$COMMAND2"
-      chmod 777 /app/audio/data -R
-
+		  for LANGUAGE in $(echo "$LANGUAGES" | tr ',' '\n'); do
+			  OUTPUT_DIR="$TARGET_DIR/${BASENAME}-${LANGUAGE}"
+			  COMMAND="whisper \"$TARGET_FILE\" --model $MODEL --language $LANGUAGE --output_dir \"$OUTPUT_DIR\""
+			  echo "starte verarbeitung für $LANGUAGES"
+			  eval "$COMMAND"
+		  done
 
       # Lock-Datei entfernen
       rm -f "$LOCK_FILE"
