@@ -1,23 +1,38 @@
 #!/bin/bash
 
-# Setze die Umgebungsvariable f  r das Modell
-export MODEL=${WHISPER_MODEL:-tiny}
+# Pfade definieren
+VOLUME_DIR="/app/audio/data/0_settings/"
+SCRIPT_SRC="/check.sh"
+SCRIPT_DEST="$VOLUME_DIR/check.sh"
+SETTINGS_FILE="$VOLUME_DIR/settings.txt"
 
-# Stelle den SMB zugriff sicher
-chmod 777 /app/audio/data -R
+# Volume sicherstellen
+mkdir -p "$VOLUME_DIR"
 
-# F  ge den Crontab-Eintrag hinzu (inkl. PATH und SHELL)
+# Script ins Volume kopieren
+cp "$SCRIPT_SRC" "$SCRIPT_DEST"
+chmod +x "$SCRIPT_DEST"
+
+# Standard-Settings anlegen, falls sie nicht existieren
+if [ ! -f "$SETTINGS_FILE" ]; then
+  cat <<EOL > "$SETTINGS_FILE"
+# Modell für Whisper
+MODEL=medium
+# Sprachen (Komma-separiert, z.B. en,de)
+LANGUAGES=en,de
+EOL
+fi
+
+# Crontab aktualisieren
 (
     echo "PATH=/usr/local/bin:/usr/bin:/bin"
     echo "SHELL=/bin/bash"
     crontab -l 2>/dev/null
-    echo "*/1 * * * * MODEL=$MODEL /bin/bash /check.sh >> /var/log/check.log 2>&1"
+    echo "*/1 * * * * /bin/bash $SCRIPT_DEST >> /var/log/check.log 2>&1"
 ) | crontab -
 
-# Debug-Ausgabe:  ^|berpr  fe die Crontab
-echo "Aktuelle Crontab:"
+# Debug: Aktuelle Crontab ausgeben
 crontab -l
 
-# Starte den Cron-Dienst im Vordergrund
+# Cron-Dienst starten
 cron -f
-
