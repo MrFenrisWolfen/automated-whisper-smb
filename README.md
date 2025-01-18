@@ -34,7 +34,6 @@ You can change the model and language settings inside the settings.txt, which is
 the SMB network folder. If needed the script itself is also there to make changes while its running for debugging 
 purpose
 
-
 The models you can use so far are:
 
 - tiny ~39mb
@@ -44,6 +43,8 @@ The models you can use so far are:
 - large ~1550mb
 - turbo ~809mb
 
+If you just started the Container it can took up to two minutes before you can edit the settings.txt file please keep that
+in mind.
 
 3. Usage:
 
