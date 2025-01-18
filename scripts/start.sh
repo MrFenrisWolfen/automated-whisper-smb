@@ -19,7 +19,7 @@ if [ ! -f "$SETTINGS_FILE" ]; then
 # Modell für Whisper
 MODEL=medium
 # Sprachen (Komma-separiert, z.B. en,de)
-LANGUAGES=en,de
+LANGUAGES=de,en
 EOL
 fi
 
