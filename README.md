@@ -30,10 +30,9 @@ Or in case you have to use the CPU:
 sudo docker-compose --profile cpu up -d
 ```
 
-You can change the model and language settings inside the settings.txt, which is inside the 0_settings folder inside
+You can change the model and language settings inside the settings.txt, which is located in the 0_settings folder inside
 the SMB network folder. If needed the script itself is also there to make changes while its running for debugging 
 purpose
-
 
 
 The models you can use so far are:
