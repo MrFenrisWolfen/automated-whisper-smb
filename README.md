@@ -30,13 +30,13 @@ Or in case you have to use the CPU:
 sudo docker-compose --profile cpu up -d
 ```
 
-You can specify the used model with an env variable at the start in case of some tests or just for playing around:
+You can change the model and language settings inside the settings.txt, which is inside the 0_settings folder inside
+the SMB network folder. If needed the script itself is also there to make changes while its running for debugging 
+purpose
 
-```
-WHISPER_MODEL=tiny docker-compose --profile cpu up -d
-```
 
-The models so far are:
+
+The models you can use so far are:
 
 - tiny ~39mb
 - base ~74mb
