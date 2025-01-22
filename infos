@@ -95,6 +95,108 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 
+----------------------------------------------------------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ 2  sudo apt update
+    3  sudo apt install cuda-12-6
+    4  sudo add-apt-repository ppa:graphics-drivers/ppa
+    5  sudo apt-get update
+    6  sudo apt install cuda-12-6
+    7  sudo add-apt-repository ppa:graphics-drivers/ppa
+    8  sudo apt-get update
+    9  apt update
+   10  sudo apt update
+   11  sudo apt install cuda-12-6
+   12  nvcc -version
+   13  sudo apt install nvidia-cuda-toolkit
+   14  sudo dpkg -i cuda-repo-<version>.deb
+   15  sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/<distro>/x86_64/7fa2af80.pub
+   16  sudo apt-get update
+   17  sudo apt-get install cuda
+   18  sudo apt-get install cuda-12-6
+   19  wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+   20  sudo dpkg -i cuda-keyring_1.1-1_all.deb
+   21  sudo apt-get update
+   22  sudo apt install cuda-12-6
+   23  nvidia-smi
+   24  sudo reboot
+   25  sudo docker-compose version
+   26  nvidia-smi
+   27  sudo nvidia-ctk runtime configure --runtime=docker
+   28  sudo apt-get install -y nvidia-container-toolkit
+   29  nvidia-smi
+   30  sudo nvidia-ctk runtime configure --runtime=docker
+   31  sudo systemctl restart docker
+   32  sudo docker ps
+   33  sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   34  sudo reboot
+   35  sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   36  sudo nvidia-ctk runtime configure --runtime=docker
+   37  sudo docker run --runtime nvidia -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   38  sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   39  cd /var/snap/
+   40  ls
+   41  cd docker/
+   42  ls
+   43  cd current
+   44  ls
+   45  cd config/
+   46  ls
+   47  cat daemon.json
+   48  ls
+   49  nvidia-ctk runtime configure --runtime=docker
+   50  cat /etc/docker/daemon.json
+   51  sudo nano daemon.json
+   52  sudo reboot
+   53  sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   54  sudo docker
+   55  sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+   56  history
+
+
+
+https://saturncloud.io/blog/how-to-install-pytorch-on-the-gpu-with-docker/
+
+https://hub.docker.com/r/nvidia/cuda/tags
+
+https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=24.04&target_type=deb_network
+
+
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+
+sudo apt install cuda-12-6
+
+reboot
+
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+sudo apt install nvidia-cuda-toolkit -y
+
+sudo nvidia-ctk runtime configure --runtime=docker
+
+sudo systemctl restart docker
+
+sudo docker run --gpus all -it nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04 bash
+
+
+
+
+
+
+
 
 
 
