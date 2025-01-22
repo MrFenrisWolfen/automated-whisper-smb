@@ -1,5 +1,5 @@
 # Basisimage
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
 
 # Benötigte Programme
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
