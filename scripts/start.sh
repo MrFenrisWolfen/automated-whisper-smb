@@ -8,6 +8,7 @@ SETTINGS_FILE="$VOLUME_DIR/settings.txt"
 
 # volume erstellen
 mkdir -p "$VOLUME_DIR"
+mkdir -p "$VOLUME_DIR/log"
 
 # script ins volume kopieren
 cp "$SCRIPT_SRC" "$SCRIPT_DEST"
@@ -15,13 +16,19 @@ chmod +x "$SCRIPT_DEST"
 
 # Standard-Settings anlegen, falls sie nicht existieren
 if [ ! -f "$SETTINGS_FILE" ]; then
-  cat <<EOL > "$SETTINGS_FILE"
+cat <<'EOL' > "$SETTINGS_FILE"
 # Modell für Whisper
 MODEL=medium
 # Sprachen (Komma-separiert, z.B. en,de)
 LANGUAGES=de,en
+#
+# -----------------------------------------------------------------------------------------------------------
 # Benutzerdefinierter befehl der statt dem standard Befehl ausgeführt werden soll per Datei
 # (nur zu debugging zwecken, Befehl anpassen und Raute entfernen)
+#
+# \"$TARGET_FILE\" = Video / Audiodateien innerhalb des Verzeichnisses
+# --output_dir \"$OUTPUT_DIR\" = Ausgabeordner der Dateien mit namen der "verarbeiteten Datei/Sprachkürzel"
+#
 # CUSTOM_COMMAND="whisper \"$TARGET_FILE\" --model $MODEL --language $LANGUAGE --output_dir \"$OUTPUT_DIR\""
 EOL
 fi
