@@ -1,5 +1,5 @@
-# Basisimage
-FROM nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
+# Base-Image
+FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 
 # Benötigte Programme
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -11,16 +11,16 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     cron
 
-# PIP commands
+# PIP upgrade
 RUN pip install --upgrade pip
 
 # Installation von Whisper und Pytorch
 RUN pip install -U openai-whisper
 RUN pip3 install torch torchvision torchaudio
 
-# Herunterladen der Scripts von Github
+# Kopieren der Scripts in den Container root
 COPY scripts/check_for_new_files.sh /check.sh
 COPY scripts/start.sh /start.sh
 
-# Startbefehl, um das Skript beim Container-Start auszuführen
+# Startbefehl, um das start-Skript beim Container-Start auszuführen
 CMD ["bash", "/start.sh"]
