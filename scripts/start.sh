@@ -18,10 +18,16 @@ chmod +x "$SCRIPT_DEST"
 if [ ! -f "$SETTINGS_FILE" ]; then
 cat <<'EOL' > "$SETTINGS_FILE"
 # Modell für Whisper
+# Empfohlen ist medium (standard) bei kompatibilitätsproblemen können tiny oder turbo ausprobiert werden.
+# Mögliche models und GPU-VRAM verbrauch: 
+# tiny (~ 1GB), base (~ 1 GB), small (~ 2 GB), medium (~ 5 GB), large (~ 10 GB), turbo (~ 6 GB)
+
 MODEL=medium
+
 # Sprachen (Komma-separiert, z.B. en,de)
+
 LANGUAGES=de,en
-#
+
 # -----------------------------------------------------------------------------------------------------------
 # Benutzerdefinierter befehl der statt dem standard Befehl ausgeführt werden soll per Datei
 # (nur zu debugging zwecken, Befehl anpassen und Raute entfernen)
