@@ -34,7 +34,7 @@ EOL
 fi
 
 # Crontab aktualisieren
-CRON_JOB="*/1 * * * * /bin/bash $SCRIPT_DEST >> /var/log/check.log 2>&1"
+CRON_JOB="*/1 * * * * /bin/bash $SCRIPT_DEST >> $VOLUME_DIR/log/whisper.log 2>&1"
 
 if ! crontab -l 2>/dev/null | grep -qF "$CRON_JOB"; then
     # Crontab aktualisieren, wenn der Eintrag nicht existiert
