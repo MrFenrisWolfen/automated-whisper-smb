@@ -3,6 +3,17 @@
 This is an Dockerfile, Docker-Compose and Script for running an openai-whisper instance
 which is creating subtitles in english and german for files on an network drive fully automated
 
+PREREQUISIT:
+
+As a prerequisite for a smooth workflow, a Docker environment with GPU support is required. Unfortunately, it is
+not sufficient to simply install Docker; you also need the NVIDIA Container Toolkit and the appropriate drivers for 
+a CUDA-enabled container.
+
+
+
+
+
+
 SETUP:
 
 1. Clone this repo to your desired folder (as example your actual working DIR)
