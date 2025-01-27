@@ -6,7 +6,9 @@ the GPU. Please execute the commands in the specified order.
 
 #  BASICS
 
-```sudo apt update
+```
+sudo apt update
+```
 
 sudo apt install curl
 
