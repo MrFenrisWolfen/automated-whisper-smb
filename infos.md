@@ -4,7 +4,7 @@ This guide is intended to set up an Ubuntu 24.04 server with a Docker environmen
 the GPU. Please execute the commands in the specified order.
 
 
------------------------------------------- BASICS ----------------------------------------
+# ------------------------------------------ BASICS ----------------------------------------
 
 ```sudo apt update```
 
