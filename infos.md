@@ -30,7 +30,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
 - Add the repository to Apt sources:
-```
+```bash
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
