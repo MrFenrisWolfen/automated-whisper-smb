@@ -70,7 +70,7 @@ If you did this correct and want to test if the gpu is working inside docker run
 sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ```
 
-If your output looks like this the GPU is working and you can go further with whisper.
+If your output looks like this the GPU is working and you can go further with whisper:
 ```
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 550.127.08             Driver Version: 550.127.08     CUDA Version: 12.4     |
