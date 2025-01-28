@@ -53,7 +53,7 @@ The models you can use so far are:
 - large ~1550mb
 - turbo ~809mb
 
-If you just started the Container it can took up to two minutes before you can edit the settings.txt file please keep that
+If you just started the Container it can took up to one or two minutes before you can edit the settings.txt file please keep that
 in mind.
 
 3. Usage:
