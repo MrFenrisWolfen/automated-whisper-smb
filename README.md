@@ -9,8 +9,7 @@ As a prerequisite for a smooth workflow, a Docker environment with GPU support i
 not sufficient to simply install Docker; you also need the NVIDIA Container Toolkit and the appropriate drivers for 
 a CUDA-enabled container.
 
-
-
+If needed [HERE](infos.md) is a Guide how to install Docker, Nvidia Driver and Nvidia Toolkit to a fresh Ubuntu 24.04 Server
 
 
 
