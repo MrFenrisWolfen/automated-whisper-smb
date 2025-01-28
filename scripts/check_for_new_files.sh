@@ -3,18 +3,18 @@
 # pfad des scripts
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
-# timestamp
-echo " " >> $SCRIPT_DIR/log/check.log
-echo "==========================================" >> $SCRIPT_DIR/log/check.log
-echo " Durchgang gestartet: $(date '+%Y-%m-%d %H:%M:%S')" >> $SCRIPT_DIR/log/check.log
-echo "==========================================" >> $SCRIPT_DIR/log/check.log
-
 # prüfen ob die Lock-Datei existiert und abbruch falls ja
 SCRIPT_LOCK="$SCRIPT_DIR/script.lock"
 if [ -f "$SCRIPT_LOCK" ]; then
   echo "Das Script ist bereits in Verwendung, stoppe erneutes Starten." >> $SCRIPT_DIR/log/check.log
   exit 0
 fi
+
+# timestamp
+echo " " >> $SCRIPT_DIR/log/check.log
+echo "==========================================" >> $SCRIPT_DIR/log/check.log
+echo " Durchgang gestartet: $(date '+%Y-%m-%d %H:%M:%S')" >> $SCRIPT_DIR/log/check.log
+echo "==========================================" >> $SCRIPT_DIR/log/check.log
 
 # Lock-Datei erstellen
 touch "$SCRIPT_LOCK"
