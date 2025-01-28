@@ -20,7 +20,7 @@ reboot
 ```
 # Docker
 
-# Add Docker's official GPG key:
+- Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
