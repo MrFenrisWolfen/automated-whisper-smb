@@ -10,8 +10,8 @@ services:
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-medium}"
     volumes:
-      - whisper_data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
-      - whisper_cache:/root/.cache/whisper  # Persistente Speicherung von Modellen nach dem 1. Download
+      - data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
+      - cache:/root/.cache/whisper  # Persistente Speicherung von Modellen nach dem 1. Download
     deploy:
       resources:
         reservations:
@@ -31,8 +31,8 @@ services:
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-small}"
     volumes:
-      - whisper_data:/app/audio/data
-      - whisper_cache:/root/.cache/whisper
+      - data:/app/audio/data
+      - cache:/root/.cache/whisper
     profiles:
       - cpu  # Dieser Service wird nur im CPU-Profil gestartet
     restart: unless-stopped
@@ -52,10 +52,10 @@ services:
       - "139:139"
       - "445:445"
     volumes:
-      - whisper_data:/storage
+      - data:/storage
     restart: unless-stopped
 
 # Gemeinsame Volumes
 volumes:
-  whisper_data:
-  whisper_cache:
+  data:
+  cache:
