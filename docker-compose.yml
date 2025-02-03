@@ -6,7 +6,7 @@ services:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
-    container_name: gpu
+    container_name: whisper-gpu
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-medium}"
     volumes:
@@ -27,7 +27,7 @@ services:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
-    container_name: cpu
+    container_name: whisper-cpu
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-small}"
     volumes:
@@ -40,7 +40,7 @@ services:
   # SMB-Server
   samba:
     image: dockurr/samba
-    container_name: smb-server
+    container_name: whisper-smb
     environment:
       NAME: "whisper"
       USER: "samba"
