@@ -4,40 +4,40 @@ services:
   # Whisper GPU
   gpu:
     build:
-      context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
+      context: .            # . Für das Verzeichnis mit dem Dockerfile (workingdir)
       dockerfile: whisper.dockerfile
     container_name: whisper-gpu
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-medium}"
     volumes:
-      - data:/app/audio/data   # Gemeinsames Volume mit SMB-Server
-      - cache:/root/.cache/whisper  # Persistente Speicherung von Modellen nach dem 1. Download
+      - data:/app/audio/data   # Gemountetes Volume vom smb Server
+      - cache:/root/.cache/whisper  # Permanente Speicherung von Whisper-Models nach dem 1. Download
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]  # GPU nutzen, falls verfügbar
-    runtime: nvidia  # Notwendig für GPU-Unterstützung
+            - capabilities: [gpu]  # nutzung der gpu falls vorhanden
+    runtime: nvidia  # notwendigkeit um eine gpu unterstützung zu haben
     profiles:
-      - gpu  # Dieser Service wird nur im GPU-Profil gestartet
+      - gpu  # damit bei --profile gpu dieser block genutzt wird
     restart: unless-stopped
 
   # Whisper CPU
   cpu:
     build:
-      context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
+      context: .            # . Für das Verzeichnis mit dem Dockerfile (workingdir)
       dockerfile: whisper.dockerfile
     container_name: whisper-cpu
     environment:
       WHISPER_MODEL:  "${WHISPER_MODEL:-small}"
     volumes:
-      - data:/app/audio/data
-      - cache:/root/.cache/whisper
+      - data:/app/audio/data   # Gemountetes Volume vom smb Server
+      - cache:/root/.cache/whisper  # Permanente Speicherung von Whisper-Models nach dem 1. Download
     profiles:
-      - cpu  # Dieser Service wird nur im CPU-Profil gestartet
+      - cpu  # Damit bei --profile cpu dieser Block genutzt wird
     restart: unless-stopped
 
-  # SMB-Server
+  # SMB
   samba:
     image: dockurr/samba
     container_name: whisper-smb
@@ -52,10 +52,10 @@ services:
       - "139:139"
       - "445:445"
     volumes:
-      - data:/storage
+      - data:/storage  # Gemountetes Volume vom smb Server
     restart: unless-stopped
 
-# Gemeinsame Volumes
+# Volumes für die Daten
 volumes:
   data:
   cache:
