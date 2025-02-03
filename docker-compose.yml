@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   # Whisper GPU
-  whisper-gpu:
+  gpu:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
 
   # Whisper CPU
-  whisper-cpu:
+  cpu:
     build:
       context: .            # Verweis auf das Verzeichnis mit dem Dockerfile
       dockerfile: whisper.dockerfile
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
 
   # SMB-Server
-  whisper_samba:
+  samba:
     image: dockurr/samba
     container_name: smb-server
     environment:
