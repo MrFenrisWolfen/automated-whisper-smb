@@ -25,15 +25,18 @@ cat <<'EOL' > "$SETTINGS_FILE"
 MODEL=medium
 
 # Sprachen (Komma-separiert, z.B. en,de)
+# Erstellt auch für jede Sprache einen einzelnen Durchlauf.
 
 LANGUAGES=de,en
 
 # -----------------------------------------------------------------------------------------------------------
 # Benutzerdefinierter befehl der statt dem standard Befehl ausgeführt werden soll per Datei
-# (nur zu debugging zwecken, Befehl anpassen und Raute entfernen)
+# (nur zu debugging zwecken, Befehl anpassen und Hashtag entfernen)
 #
 # \"$TARGET_FILE\" = Video / Audiodateien innerhalb des Verzeichnisses
 # --output_dir \"$OUTPUT_DIR\" = Ausgabeordner der Dateien mit namen der "verarbeiteten Datei/Sprachkürzel"
+# --language $LANGUAGE = enthält für jeden der durchläufe das spezifische Länderkürzel
+# (bei de,fr,en = 1. Durchlauf Deutsch, 2. Durchlauf Französisch, 3. Durchlauf Englisch)
 #
 # CUSTOM_COMMAND="whisper \"$TARGET_FILE\" --model $MODEL --language $LANGUAGE --output_dir \"$OUTPUT_DIR\""
 EOL
