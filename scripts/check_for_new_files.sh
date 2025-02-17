@@ -14,7 +14,7 @@ fi
 echo " " >> $SCRIPT_DIR/log/check.log
 echo "==========================================" >> $SCRIPT_DIR/log/check.log
 echo " Durchgang gestartet: $(date '+%Y-%m-%d %H:%M:%S')" >> $SCRIPT_DIR/log/check.log
-echo "==========================================" >> $SCRIPT_DIR/log/check.log
+echo " " >> $SCRIPT_DIR/log/check.log
 
 # Lock-Datei erstellen
 touch "$SCRIPT_LOCK"
@@ -154,3 +154,7 @@ fi
 
 # Lock-Datei entfernen, wenn das Skript beendet ist
 rm -f "$SCRIPT_LOCK"
+
+echo " " >> $SCRIPT_DIR/log/check.log
+echo " Durchgang beendet: $(date '+%Y-%m-%d %H:%M:%S')" >> $SCRIPT_DIR/log/check.log
+echo "==========================================" >> $SCRIPT_DIR/log/check.log
